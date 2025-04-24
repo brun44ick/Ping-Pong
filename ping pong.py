@@ -76,8 +76,8 @@ pl2 = Player(player2, 590, 100, 200,200,speed)
 
 font.init()
 title_font = font.SysFont('arial', 70)
-win = title_font.render('WIN!', True,GREEN)
-lose = title_font.render('LOSE!', True,RED)
+win = title_font.render('правый проиграл!', True,RED)
+lose = title_font.render('левый проиграл!', True,RED)
 
 font.init()
 label_font = font.SysFont('arial', 20)
@@ -96,7 +96,28 @@ while game:
         pl2.draw(window)
         pl1.update(K_w,K_s)
         pl2.update(K_UP, K_DOWN)
+
+        if sprite.collide_rect(pl1,ball):
+            ball.speed_x *= -1
+        if ball.rect.x <= 0:
+            window.blit(lose,(200,200))
+            display.update()
+            finish = True
+
+        if sprite.collide_rect(ball,pl2):
+            ball.speed_x *= -1
+        if ball.rect.x >= WIN_W - 130:
+            window.blit(win,(200,200))
+            display.update()
+            finish = True
         
+    else:
+        time.delay(3000)
+        ball = Ball(sharik, 300,230,130,100,4)
+        pl1 = Player(player1, 5,140,30,130, speed)
+        pl2 = Player(player2, 590, 100, 200,200,speed)
+
+        finish = False
         
     for e in event.get():
         if e.type == QUIT:
