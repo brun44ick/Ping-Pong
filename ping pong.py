@@ -96,7 +96,8 @@ while game:
         pl2.draw(window)
         pl1.update(K_w,K_s)
         pl2.update(K_UP, K_DOWN)
-
+        
+        
     for e in event.get():
         if e.type == QUIT:
             game = False
